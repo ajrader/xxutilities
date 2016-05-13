@@ -1,0 +1,1 @@
+#### The purpose of this repository is to hold utility code and technical wikis for the data science team. Examples could include benchmarking scripts, R packages, Python scripts, or step-by-step instructions that are useful but not specific to any one project. Please contribute as you see fit. See the Wiki page for detailed technical how-to's.
