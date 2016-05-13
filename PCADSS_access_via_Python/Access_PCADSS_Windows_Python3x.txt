@@ -1,0 +1,40 @@
+FROM DEREK MURRAY - Access to PCADSS with Python 3.x
+
+Download Anaconda – Python Distribution (latest version was 3-2.4.0 at time of writing) from OLEX https://olex-secure.openlogic.com/login
+Install application using defaults, be sure to check the option to have the Windows PATH variable set.
+Set up Anaconda to get packages from behind the proxy.  Edit the following file using Notepad subbing in your user ID and SFNet password and place in the Anaconda install directory directory:C:\Users\sfAlias\AppData\Local\Continuum\Anaconda3
+proxy.condarc
+ 
+Since Windows does not entirely support filenames that begin with “.”, we will need to rename the proxy.condarc to .condarc using either the mv command in a Unix interpreter like Cygwin or Git Bash.  Otherwise, do the following:
+Open a Windows command prompt (use Windows + R and enter CMD)
+Navigate to the Anaconda install directory listed above and issue:
+more proxy.condarc > .condarc
+del proxy.condarc
+Open Start > All Programs > Anaconda 3 > Anaconda Prompt and issue the following commands
+conda update conda
+conda update anaconda
+conda install pyodbc
+Copy the sample PCADSS access.ipynb notebook from GitLab into your working directory and open in Jupyter. https://sfgitlab.opr.test.statefarm.org/data-science/utilities/tree/master/PCADSS_access_via_Python If you don’t have Git, an easy way is to open the file in GitLab, choose the Raw option, and copy and paste the code into a .ipynb file.
+Run the cells containing the following content:
+import pyodbc
+import pandas as pd
+ 
+con = pyodbc.connect("DSN=ACTDM4")
+ 
+Run any of the cells with sql = and data =
+ 
+ 
+ 
+Resources:
+Jupyter Documentation
+http://jupyter.readthedocs.org/en/latest/index.html#
+Python Users Community Page at SF
+https://sfwikis.opr.statefarm.org/sites/systems/Wiki%20Pages/Python%20User%20Community%20Page.aspx?mode=none
+PyODBC project
+https://github.com/mkleehammer/pyodbc
+Conda Configuration
+http://conda.pydata.org/docs/config.html
+Anaconda FAQ
+http://docs.continuum.io/anaconda/faq
+ 
+ 

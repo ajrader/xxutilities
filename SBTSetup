@@ -1,0 +1,60 @@
+Download sbt from OLEX
+
+Untar into /usr/local/bin
+tar -xzf PATH_TO_DOWNLOADED_SBT_TARBALL /usr/local/bin
+
+Set execution permissions on the binaries
+chmod 755 /usr/local/bin/sbt/bin/*
+
+Add sbt to your $PATH via ~/.bash_profile
+Open for editing vi ~/.bash_profile
+Add :/usr/local/bin/sbt/bin to $PATH
+
+To configure sbt to use the State Farm Artifactory for dependencies, 
+create a ~/.sbt/repositories file with the following inside
+[repositories]
+  local
+  sf-artifactory: http://lt00as50.opr.statefarm.org/artifactory/repo
+
+To authenticate to the State Farm Artifactory, create a ~/.ivy2/.credentials 
+file with the following inside:
+realm=Artifactory Realm
+host=lt00as50.opr.statefarm.org
+user=alias
+password={DESede}…..
+NOTE: No forward slashes in for the curly braces
+
+Where USER is your alias and PASSWORD is your encrypted password from Artifactory, 
+which can be found on your profile.
+
+Note that each project will need to declare this credentials files in its 
+build.sbt with the following:
+credentials += Credentials(Path.userHome / ".ivy2" / ".credentials")
+
+Add a line to ~/.bash_profile to override default public repos
+
+export SBT_OPTS="$SBT_OPTS -Dsbt.override.build.repos=true"
+Reload your session (or create a new one)
+
+source ~/.bash_profile
+
+mkdir AND
+cd ~/.ivy2/local/com.eed3si9n/sbt-assembly/scala_2.10/sbt_0.13/0.14.0/jars
+cd ~/.ivy2/local/com.eed3si9n/sbt-assembly/scala_2.10/sbt_0.13/0.14.0/ivys
+cd ~/.ivy2/local/com.eed3si9n/sbt-assembly/scala_2.10/sbt_0.13/0.14.0/srcs
+
+copy files from https://dl.bintray.com/typesafe/ivy-releases/org.scala-sbt/sbt/0.13.9/
+
+Create a file under ~/.sbt/0.13/plugins/credentials.sbt that wires up the 
+default credentials
+
+credentials += Credentials(Path.userHome / “.ivy2” / ".credentials")
+
+Have build.sbt in the same directory as your project clone.
+
+Have assembly.sbt under a project folder under the clone directory with the 
+following contents
+addSbtPlugin("com.eed3si9n" % "sbt-assembly" % "0.14.0")
+
+Run SBT from first dataPrep directory. 
+You should see the jar file under the target directory.

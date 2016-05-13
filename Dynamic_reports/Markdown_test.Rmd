@@ -1,0 +1,30 @@
+---
+title: "R Markdown test"
+author: "Malia Andrus"
+output: pdf_document
+---
+
+This is the start of my report. I can write all the things I need to write here in this block.
+*italics* and also _italics_
+**bold** and also __bold__
+
+~~strikethrough~~
+[link](https://sfgitlab.opr.test.statefarm.org/groups/data-science)
+
+# This is a header
+
+## This is smaller header
+
+endash: --
+emdash: ---
+
+Two plus two equals `r 2+2`
+
+Here's a chunk of code:
+```{r}
+seq(0,1,0.1)
+```
+Without the code:
+```{r echo=FALSE}
+seq(0,1,0.1)
+```

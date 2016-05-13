@@ -1,0 +1,4 @@
+data for credit.ipynb : https://www.kaggle.com/c/GiveMeSomeCredit
+data for ForestCover : https://www.kaggle.com/c/forest-cover-type-prediction
+
+Accounts are needed for downloading.

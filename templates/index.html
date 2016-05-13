@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Image viewer</title>
+    </head>
+    <body>
+        {% if not image_list %}
+            <p> No images </p>
+        {% endif %}
+        {% for image_path in image_list %}
+        <div align="middle">
+            <img src="{{ image_path }}">
+            <b>{{ image_path }}</b>
+	</div>
+        <br />
+        {% endfor %}
+    </body>
+</html>

@@ -1,0 +1,164 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{hyperref}
+%% for inline R code: if the inline code is not correctly parsed, you will see a message
+\newcommand{\rinline}[1]{SOMETHING WRONG WITH knitr}
+%% begin.rcode setup, include=FALSE
+% library(knitr) #load up your libraries
+% opts_chunk$set(fig.path='figure/latex-', cache.path='cache/latex-')
+%% end.rcode
+
+\begin{document}
+
+
+\centerline{\sc \large This is a sample \LaTeX\ File with R Code in it}
+\vspace{.5pc}
+\centerline{\sc Some good information.}
+\centerline{\it (Read the .tex file along with this or it won't 
+            make much sense)}
+\vspace{2pc}
+
+
+\section{Some \LaTeX basics:}
+
+
+\LaTeX\ is not ``WYSIWYG''. \LaTeX\ will      completely     ignore               extra
+spaces    within                             a line of your .tex file.
+Pressing return
+in 
+the 
+middle 
+of
+a
+line
+will not register in your .dvi file. However, a double carriage-return
+is read as a paragraph break.
+
+Like this.  But any carriage-returns after the first two will be 
+completely ignored; in other words, you 
+
+
+can't 
+
+add
+
+
+
+
+
+
+more 
+
+
+
+
+space 
+
+
+between 
+
+
+
+
+lines, no matter how many times you press return in your .tex file.
+
+In order to add vertical space you have to use ``vspace''; for example, 
+you could add an inch of space by typing \verb|\vspace{1in}|, like this:
+\vspace{1in}
+
+To get three lines of space you would type \verb|\vspace{3pc}|
+(``pc'' stands for ``pica'', a font-relative size), like this:
+\vspace{3pc}
+
+Notice that \LaTeX\ commands are always preceeded by a backslash.  
+Some commands, like \verb|\vspace|, take arguments (here, a length) in
+curly brackets.  
+
+The second important thing to notice about \LaTeX\ is that you type 
+in various ``environments''...There are basically two ways that 
+you can enter and/or exit an environment;
+\vspace{1pc}
+
+\centerline{this is the first way...}
+
+\begin{center}
+this is the second way.
+\end{center}
+
+Math in \LaTeX\ is awesome. You push and pop out of the
+math environment by typing \verb|$|. For example, $2x^3 -1 = 5$ is
+typed as \verb|$2x^3 - 1 = 5$|. A more interesting example:
+$\lim_{N \to \infty} \sum_{k=1}^N f(t_k) \Delta t$.
+
+If you want something fancier, enclose your equation in double 
+dollar signs, which centers the equation and displays sub-
+and super-scripts in a more readable fashion:
+
+$$\lim_{N \to \infty} \sum_{k=1}^N f(t_k) \Delta t.$$
+
+Alternatively, if you don't want to set your equation apart, but you
+still want nice formatting, you can use \verb|\displaystyle| and get your 
+formula ``in-line''; using our example this is 
+$\displaystyle \lim_{N \to \infty} \sum_{k=1}^N f(t_k) \Delta t.$  This
+may alter line spacing somewhat.
+
+
+\section{R code in \LaTeX}
+
+You can evaluate R code inline, for example: \rinline{2+2}. Or
+we can print \rinline{LETTERS}. Expressions that return values
+of length $0$ are removed from the output, so \rinline{x<-0; NULL}
+only returns "NULL", but the value $x$ is indeed assigned $0$.
+
+You can evaluate R code in a chunk:
+
+%% a chunk with default options
+%% begin.rcode
+% 1+1
+%
+% x=rnorm(5)
+%% end.rcode
+
+You can also cache R results so they don't have to be run to be printed.
+This is important when you are running something computationally
+intensive. For the cached chunk below, you will need to wait for 10 seconds for
+the first time you compile this document, but it takes no time the
+next time you run it again.
+
+%% chunk options: cache this chunk
+%% begin.rcode my-cache, cache=TRUE
+% set.seed(123)
+% x = runif(10)
+% sd(x)  # standard deviation
+%
+% Sys.sleep(10) # test cache
+%% end.rcode
+
+If you want to show the code without evaluating, you can specify:
+
+%% chunk with no evaluation
+%% begin.rcode eval=FALSE
+% x <- runif(15)
+% sd(x)
+% x[1]
+%% end.rcode
+
+We can put R figures in, too. Let's use the Cairo PDF device.
+
+%% begin.rcode cairo-scatter, dev='cairo_pdf', fig.width=5, fig.height=5, out.width='.8\\textwidth'
+% plot(cars) # a scatter plot
+%% end.rcode
+
+Warnings, messages and errors are preserved by default when the code is run.
+
+%% begin.rcode
+% sqrt(-1) # here is a warning!
+% message('this is a message you should know')
+% 1+'a'  # impossible
+%% end.rcode
+
+So much more is available. See Yihui's
+\href{http://yihui.name/knitr/}{page}. A good cheat sheet can be found
+\href{https://wch.github.io/latexsheet/}{here}.
+
+\end{document}

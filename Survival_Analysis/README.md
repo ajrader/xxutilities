@@ -1,0 +1,2 @@
+This is an R code in IPython Notebook. 
+The code takes UMASS UIS study data as input and creates a survival model that estimates the probability of reusing drugs after a treatment program. It also compares the AUC obtained from a survival model with that of a random forest model. 
